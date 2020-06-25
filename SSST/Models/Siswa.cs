@@ -14,6 +14,8 @@ namespace SSST.Models
         public string SiswaNama { get; set; }
         [Display(Name ="Alamat")]
         public string SiswaAlamat { get; set; }
+        //penunjuk anggota pada kelas
+        public int SiswaKelas { get; set; }
 
     }
 }

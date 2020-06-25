@@ -12,5 +12,7 @@ namespace SSST.Models
         public int MapelID { get; set; }
         [Display(Name ="Nama Pelajaran")]
         public string MapelNama { get; set; }
+        //untuk menunjuk guru pengampu
+        public int GuruMapel { get; set; }
     }
 }
