@@ -54,7 +54,7 @@ namespace SSST.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MapelID,MapelNama,GuruMapel")] MataPelajaran mataPelajaran)
+        public async Task<IActionResult> Create([Bind("MapelID,MapelNama,MapelGrade,GuruMapel")] MataPelajaran mataPelajaran)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace SSST.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MapelID,MapelNama,GuruMapel")] MataPelajaran mataPelajaran)
+        public async Task<IActionResult> Edit(int id, [Bind("MapelID,MapelNama,MapelGrade,GuruMapel")] MataPelajaran mataPelajaran)
         {
             if (id != mataPelajaran.MapelID)
             {

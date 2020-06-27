@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SSST.Data;
 
 namespace SSST.Migrations
 {
     [DbContext(typeof(SSSTContext))]
-    partial class SSSTContextModelSnapshot : ModelSnapshot
+    [Migration("20200627053745_UpdateFieldGradeMapel")]
+    partial class UpdateFieldGradeMapel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
