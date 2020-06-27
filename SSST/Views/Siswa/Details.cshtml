@@ -1,0 +1,42 @@
+﻿@model SSST.Models.Siswa
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Siswa</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SiswaNim)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SiswaNim)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SiswaNama)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SiswaNama)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SiswaAlamat)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SiswaAlamat)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SiswaKelas)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SiswaKelas)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.SiswaID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

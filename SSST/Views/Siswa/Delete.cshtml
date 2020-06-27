@@ -1,0 +1,45 @@
+﻿@model SSST.Models.Siswa
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Siswa</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SiswaNim)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SiswaNim)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SiswaNama)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SiswaNama)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SiswaAlamat)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SiswaAlamat)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SiswaKelas)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SiswaKelas)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="SiswaID" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

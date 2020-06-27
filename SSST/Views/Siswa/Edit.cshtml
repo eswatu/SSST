@@ -1,0 +1,49 @@
+﻿@model SSST.Models.Siswa
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Siswa</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="SiswaID" />
+            <div class="form-group">
+                <label asp-for="SiswaNim" class="control-label"></label>
+                <input asp-for="SiswaNim" class="form-control" />
+                <span asp-validation-for="SiswaNim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SiswaNama" class="control-label"></label>
+                <input asp-for="SiswaNama" class="form-control" />
+                <span asp-validation-for="SiswaNama" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SiswaAlamat" class="control-label"></label>
+                <input asp-for="SiswaAlamat" class="form-control" />
+                <span asp-validation-for="SiswaAlamat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SiswaKelas" class="control-label"></label>
+                <input asp-for="SiswaKelas" class="form-control" />
+                <span asp-validation-for="SiswaKelas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

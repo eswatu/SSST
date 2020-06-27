@@ -1,0 +1,53 @@
+﻿@model IEnumerable<SSST.Models.Siswa>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SiswaNim)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SiswaNama)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SiswaAlamat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SiswaKelas)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SiswaNim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SiswaNama)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SiswaAlamat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SiswaKelas)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SiswaID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SiswaID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SiswaID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
