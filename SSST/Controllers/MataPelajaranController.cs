@@ -22,7 +22,8 @@ namespace SSST.Controllers
         // GET: MataPelajaran
         public async Task<IActionResult> Index()
         {
-            return View(await _context.MataPelajaran.ToListAsync());
+            var sSSTContext = _context.MataPelajaran.Include(m => m.Guru);
+            return View(await sSSTContext.ToListAsync());
         }
 
         // GET: MataPelajaran/Details/5
@@ -34,6 +35,7 @@ namespace SSST.Controllers
             }
 
             var mataPelajaran = await _context.MataPelajaran
+                .Include(m => m.Guru)
                 .FirstOrDefaultAsync(m => m.MapelID == id);
             if (mataPelajaran == null)
             {
@@ -46,6 +48,7 @@ namespace SSST.Controllers
         // GET: MataPelajaran/Create
         public IActionResult Create()
         {
+            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruID");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace SSST.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MapelID,MapelNama,MapelGrade,GuruMapel")] MataPelajaran mataPelajaran)
+        public async Task<IActionResult> Create([Bind("MapelID,MapelNama,MapelDesc,MapelGrade,GuruID")] MataPelajaran mataPelajaran)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace SSST.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruID", mataPelajaran.GuruID);
             return View(mataPelajaran);
         }
 
@@ -78,6 +82,7 @@ namespace SSST.Controllers
             {
                 return NotFound();
             }
+            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruID", mataPelajaran.GuruID);
             return View(mataPelajaran);
         }
 
@@ -86,7 +91,7 @@ namespace SSST.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MapelID,MapelNama,MapelGrade,GuruMapel")] MataPelajaran mataPelajaran)
+        public async Task<IActionResult> Edit(int id, [Bind("MapelID,MapelNama,MapelDesc,MapelGrade,GuruID")] MataPelajaran mataPelajaran)
         {
             if (id != mataPelajaran.MapelID)
             {
@@ -113,6 +118,7 @@ namespace SSST.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruID", mataPelajaran.GuruID);
             return View(mataPelajaran);
         }
 
@@ -125,6 +131,7 @@ namespace SSST.Controllers
             }
 
             var mataPelajaran = await _context.MataPelajaran
+                .Include(m => m.Guru)
                 .FirstOrDefaultAsync(m => m.MapelID == id);
             if (mataPelajaran == null)
             {

@@ -4,10 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Daftar Kelas</h1>
+<h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Buat Data Baru</a>
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -19,7 +19,7 @@
                 @Html.DisplayNameFor(model => model.KelasTahun)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.guruPengampu)
+                @Html.DisplayNameFor(model => model.Guru)
             </th>
             <th></th>
         </tr>
@@ -34,12 +34,12 @@
                 @Html.DisplayFor(modelItem => item.KelasTahun)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.guruPengampu)
+                @Html.DisplayFor(modelItem => item.Guru.GuruID)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.KelasID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.KelasID">Detil</a> |
-                <a asp-action="Delete" asp-route-id="@item.KelasID">Hapus</a>
+                <a asp-action="Details" asp-route-id="@item.KelasID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.KelasID">Delete</a>
             </td>
         </tr>
 }

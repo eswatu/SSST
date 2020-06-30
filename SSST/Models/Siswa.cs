@@ -10,7 +10,7 @@ namespace SSST.Models
     {
         public int SiswaID { get; set; }
 
-        [Display(Name ="Nomor Induk Siswa")]
+        [Display(Name ="Nomor Induk Siswa"), StringLength(12)]
         public string SiswaNim { get; set; }
 
         [Display(Name ="Nama Siswa")]
@@ -19,7 +19,12 @@ namespace SSST.Models
         public string SiswaAlamat { get; set; }
         //penunjuk anggota pada kelas
         [Display(Name ="Kelas")]
-        public int SiswaKelas { get; set; }
+
+        //single key, satu siswa -> satu kelas
+        public int KelasID { get; set; }
+        public virtual Kelas Kelas { get; set; }
+
+        public List<SiswaNilai> SiswaNilais { get; set; }
 
     }
 }

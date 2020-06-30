@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Daftar Seluruh Siswa</h1>
+<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -22,7 +22,7 @@
                 @Html.DisplayNameFor(model => model.SiswaAlamat)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SiswaKelas)
+                @Html.DisplayNameFor(model => model.Kelas)
             </th>
             <th></th>
         </tr>
@@ -40,12 +40,12 @@
                 @Html.DisplayFor(modelItem => item.SiswaAlamat)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SiswaKelas)
+                @Html.DisplayFor(modelItem => item.Kelas.KelasID)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.SiswaID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.SiswaID">Detil</a> |
-                <a asp-action="Delete" asp-route-id="@item.SiswaID">Hapus</a>
+                <a asp-action="Details" asp-route-id="@item.SiswaID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SiswaID">Delete</a>
             </td>
         </tr>
 }

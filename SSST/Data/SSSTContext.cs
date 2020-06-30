@@ -9,11 +9,29 @@ namespace SSST.Data
 {
     public class SSSTContext : DbContext
     {
-        public SSSTContext (DbContextOptions<SSSTContext> options)
+        public SSSTContext(DbContextOptions<SSSTContext> options)
             : base(options)
         {
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<SiswaNilai>().HasKey(sc => new { sc.SiswaID, sc.MapelID });
+            modelBuilder.Entity<SiswaNilai>()
+                .HasOne(s => s.Siswa)
+                .WithMany(m => m.SiswaNilais)
+                .HasForeignKey(k => k.SiswaID)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<SiswaNilai>()
+                .HasOne(m => m.MataPelajaran)
+                .WithMany(s => s.SiswaNilais)
+                .HasForeignKey(k => k.MapelID)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+
+        }
         public DbSet<SSST.Models.Siswa> Siswa { get; set; }
 
         public DbSet<SSST.Models.Guru> Guru { get; set; }
@@ -22,5 +40,8 @@ namespace SSST.Data
 
         public DbSet<SSST.Models.Kelas> Kelas { get; set; }
 
+        public DbSet<SSST.Models.SiswaNilai> SiswaNilai { get; set; }
+
     }
 }
+

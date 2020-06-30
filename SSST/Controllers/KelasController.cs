@@ -22,7 +22,8 @@ namespace SSST.Controllers
         // GET: Kelas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Kelas.ToListAsync());
+            var sSSTContext = _context.Kelas.Include(k => k.Guru);
+            return View(await sSSTContext.ToListAsync());
         }
 
         // GET: Kelas/Details/5
@@ -34,6 +35,7 @@ namespace SSST.Controllers
             }
 
             var kelas = await _context.Kelas
+                .Include(k => k.Guru)
                 .FirstOrDefaultAsync(m => m.KelasID == id);
             if (kelas == null)
             {
@@ -46,6 +48,7 @@ namespace SSST.Controllers
         // GET: Kelas/Create
         public IActionResult Create()
         {
+            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruID");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace SSST.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("KelasID,KelasNama,KelasTahun,guruPengampu")] Kelas kelas)
+        public async Task<IActionResult> Create([Bind("KelasID,KelasNama,KelasTahun,GuruID")] Kelas kelas)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace SSST.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruID", kelas.GuruID);
             return View(kelas);
         }
 
@@ -78,6 +82,7 @@ namespace SSST.Controllers
             {
                 return NotFound();
             }
+            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruID", kelas.GuruID);
             return View(kelas);
         }
 
@@ -86,7 +91,7 @@ namespace SSST.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("KelasID,KelasNama,KelasTahun,guruPengampu")] Kelas kelas)
+        public async Task<IActionResult> Edit(int id, [Bind("KelasID,KelasNama,KelasTahun,GuruID")] Kelas kelas)
         {
             if (id != kelas.KelasID)
             {
@@ -113,6 +118,7 @@ namespace SSST.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruID", kelas.GuruID);
             return View(kelas);
         }
 
@@ -125,6 +131,7 @@ namespace SSST.Controllers
             }
 
             var kelas = await _context.Kelas
+                .Include(k => k.Guru)
                 .FirstOrDefaultAsync(m => m.KelasID == id);
             if (kelas == null)
             {

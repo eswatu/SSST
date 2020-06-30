@@ -17,16 +17,22 @@
             @Html.DisplayFor(model => model.MapelNama)
         </dd>
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MapelDesc)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MapelDesc)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.MapelGrade)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.MapelGrade)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.GuruMapel)
+            @Html.DisplayNameFor(model => model.Guru)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GuruMapel)
+            @Html.DisplayFor(model => model.Guru.GuruID)
         </dd>
     </dl>
 </div>

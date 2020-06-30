@@ -1,4 +1,4 @@
-﻿@model SSST.Models.Kelas
+﻿@model SSST.Models.SiswaNilai
 
 @{
     ViewData["Title"] = "Create";
@@ -6,25 +6,25 @@
 
 <h1>Create</h1>
 
-<h4>Kelas</h4>
+<h4>SiswaNilai</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="KelasNama" class="control-label"></label>
-                <input asp-for="KelasNama" class="form-control" />
-                <span asp-validation-for="KelasNama" class="text-danger"></span>
+                <label asp-for="SiswaID" class="control-label"></label>
+                <select asp-for="SiswaID" class ="form-control" asp-items="ViewBag.SiswaID"></select>
             </div>
             <div class="form-group">
-                <label asp-for="KelasTahun" class="control-label"></label>
-                <input asp-for="KelasTahun" class="form-control" />
-                <span asp-validation-for="KelasTahun" class="text-danger"></span>
+                <label asp-for="MapelID" class="control-label"></label>
+                <input asp-for="MapelID" class="form-control" />
+                <span asp-validation-for="MapelID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="GuruID" class="control-label"></label>
-                <select asp-for="GuruID" class ="form-control" asp-items="ViewBag.GuruID"></select>
+                <label asp-for="Nilai" class="control-label"></label>
+                <input asp-for="Nilai" class="form-control" />
+                <span asp-validation-for="Nilai" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

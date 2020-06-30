@@ -24,11 +24,11 @@
             @Html.DisplayFor(model => model.KelasTahun)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.guruPengampu)
+            @Html.DisplayNameFor(model => model.Guru)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.guruPengampu)
-        </dd>
+            @Html.DisplayFor(model => model.Guru.GuruID)
+        </dd class>
     </dl>
     
     <form asp-action="Delete">

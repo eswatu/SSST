@@ -22,7 +22,8 @@ namespace SSST.Controllers
         // GET: Siswa
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Siswa.ToListAsync());
+            var sSSTContext = _context.Siswa.Include(s => s.Kelas);
+            return View(await sSSTContext.ToListAsync());
         }
 
         // GET: Siswa/Details/5
@@ -34,6 +35,7 @@ namespace SSST.Controllers
             }
 
             var siswa = await _context.Siswa
+                .Include(s => s.Kelas)
                 .FirstOrDefaultAsync(m => m.SiswaID == id);
             if (siswa == null)
             {
@@ -46,6 +48,7 @@ namespace SSST.Controllers
         // GET: Siswa/Create
         public IActionResult Create()
         {
+            ViewData["KelasID"] = new SelectList(_context.Kelas, "KelasID", "KelasID");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace SSST.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SiswaID,SiswaNim,SiswaNama,SiswaAlamat,SiswaKelas")] Siswa siswa)
+        public async Task<IActionResult> Create([Bind("SiswaID,SiswaNim,SiswaNama,SiswaAlamat,KelasID")] Siswa siswa)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace SSST.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["KelasID"] = new SelectList(_context.Kelas, "KelasID", "KelasID", siswa.KelasID);
             return View(siswa);
         }
 
@@ -78,6 +82,7 @@ namespace SSST.Controllers
             {
                 return NotFound();
             }
+            ViewData["KelasID"] = new SelectList(_context.Kelas, "KelasID", "KelasID", siswa.KelasID);
             return View(siswa);
         }
 
@@ -86,7 +91,7 @@ namespace SSST.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SiswaID,SiswaNim,SiswaNama,SiswaAlamat,SiswaKelas")] Siswa siswa)
+        public async Task<IActionResult> Edit(int id, [Bind("SiswaID,SiswaNim,SiswaNama,SiswaAlamat,KelasID")] Siswa siswa)
         {
             if (id != siswa.SiswaID)
             {
@@ -113,6 +118,7 @@ namespace SSST.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["KelasID"] = new SelectList(_context.Kelas, "KelasID", "KelasID", siswa.KelasID);
             return View(siswa);
         }
 
@@ -125,6 +131,7 @@ namespace SSST.Controllers
             }
 
             var siswa = await _context.Siswa
+                .Include(s => s.Kelas)
                 .FirstOrDefaultAsync(m => m.SiswaID == id);
             if (siswa == null)
             {
