@@ -48,7 +48,7 @@ namespace SSST.Controllers
         // GET: MataPelajaran/Create
         public IActionResult Create()
         {
-            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruID");
+            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruNama");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace SSST.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruID", mataPelajaran.GuruID);
+            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruNama", mataPelajaran.GuruID);
             return View(mataPelajaran);
         }
 
@@ -82,7 +82,7 @@ namespace SSST.Controllers
             {
                 return NotFound();
             }
-            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruID", mataPelajaran.GuruID);
+            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruNama", mataPelajaran.GuruID);
             return View(mataPelajaran);
         }
 
@@ -118,7 +118,7 @@ namespace SSST.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruID", mataPelajaran.GuruID);
+            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruNama", mataPelajaran.GuruID);
             return View(mataPelajaran);
         }
 
