@@ -24,6 +24,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Guru)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kelas)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -40,7 +43,10 @@
                 @Html.DisplayFor(modelItem => item.MapelGrade)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Guru.GuruNama)
+                @Html.DisplayFor(modelItem => item.Guru.GuruID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kelas.KelasID)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.MapelID">Edit</a> |

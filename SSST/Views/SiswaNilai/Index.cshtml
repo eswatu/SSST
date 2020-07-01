@@ -16,6 +16,9 @@
                 @Html.DisplayNameFor(model => model.Siswa)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.MataPelajaran)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Nilai)
             </th>
             <th></th>
@@ -26,6 +29,9 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Siswa.SiswaID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MataPelajaran.MapelID)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Nilai)

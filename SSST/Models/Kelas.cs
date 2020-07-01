@@ -19,9 +19,9 @@ namespace SSST.Models
         public int GuruID { get; set; }
         public Guru Guru { get; set; }
         //navigational key, satu kelas banyak siswa
-        public virtual ICollection<Siswa> Siswas{ get; set; }
+        public ICollection<Siswa> Siswas{ get; set; }
         //navigational key, satu kelas banyak mata pelajaran
-        public virtual ICollection<MataPelajaran> Mapels { get; set; }
+        public ICollection<MataPelajaran> Mapels { get; set; }
         public Kelas()
         {
             Mapels = new HashSet<MataPelajaran>();

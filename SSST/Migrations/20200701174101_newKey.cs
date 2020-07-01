@@ -2,7 +2,7 @@
 
 namespace SSST.Migrations
 {
-    public partial class InitialSet : Migration
+    public partial class newKey : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,7 +50,7 @@ namespace SSST.Migrations
                     MapelDesc = table.Column<string>(nullable: true),
                     MapelGrade = table.Column<int>(nullable: false),
                     GuruID = table.Column<int>(nullable: false),
-                    KelasID = table.Column<int>(nullable: true)
+                    KelasID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -15,6 +15,8 @@ namespace SSST.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            //key many to many siswa dengan nilai
             modelBuilder.Entity<SiswaNilai>().HasKey(sc => new { sc.SiswaID, sc.MapelID });
             modelBuilder.Entity<SiswaNilai>()
                 .HasOne(s => s.Siswa)
@@ -30,6 +32,11 @@ namespace SSST.Data
                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
+            modelBuilder.Entity<MataPelajaran>()
+                .HasOne(k => k.Kelas)
+                .WithMany(m => m.Mapels)
+                .HasForeignKey(x => x.KelasID)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
         }
         public DbSet<SSST.Models.Siswa> Siswa { get; set; }
