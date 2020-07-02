@@ -2,7 +2,7 @@
 
 namespace SSST.Migrations
 {
-    public partial class newKey : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,8 +26,9 @@ namespace SSST.Migrations
                     KelasID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     KelasNama = table.Column<string>(nullable: true),
+                    KelasTingkat = table.Column<int>(nullable: false),
                     KelasTahun = table.Column<int>(nullable: false),
-                    GuruID = table.Column<int>(nullable: false)
+                    GuruID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -37,7 +38,7 @@ namespace SSST.Migrations
                         column: x => x.GuruID,
                         principalTable: "Guru",
                         principalColumn: "GuruID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -78,7 +79,7 @@ namespace SSST.Migrations
                     SiswaNim = table.Column<string>(maxLength: 12, nullable: true),
                     SiswaNama = table.Column<string>(nullable: true),
                     SiswaAlamat = table.Column<string>(nullable: true),
-                    KelasID = table.Column<int>(nullable: false)
+                    KelasID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -88,7 +89,7 @@ namespace SSST.Migrations
                         column: x => x.KelasID,
                         principalTable: "Kelas",
                         principalColumn: "KelasID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(

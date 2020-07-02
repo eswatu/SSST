@@ -11,12 +11,13 @@ namespace SSST.Models
         public int KelasID { get; set; }
         [Display(Name ="Nama Kelas")]
         public string KelasNama { get; set; }
+        public Tingkat KelasTingkat { get; set; }
         //KelasTahun untuk digunakan penanda angkatan
         [Display(Name ="Tahun")]
         public int KelasTahun { get; set; }
         //merujuk nama guru kelas/wali kelas
         [Display(Name ="Wali Kelas")]
-        public int GuruID { get; set; }
+        public int? GuruID { get; set; }
         public Guru Guru { get; set; }
         //navigational key, satu kelas banyak siswa
         public ICollection<Siswa> Siswas{ get; set; }

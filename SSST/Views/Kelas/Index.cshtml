@@ -16,6 +16,9 @@
                 @Html.DisplayNameFor(model => model.KelasNama)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.KelasTingkat)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.KelasTahun)
             </th>
             <th>
@@ -31,10 +34,13 @@
                 @Html.DisplayFor(modelItem => item.KelasNama)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.KelasTingkat)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.KelasTahun)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Guru.GuruNama)
+                @Html.DisplayFor(modelItem => item.Guru.GuruID)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.KelasID">Edit</a> |

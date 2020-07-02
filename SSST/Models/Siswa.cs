@@ -21,7 +21,8 @@ namespace SSST.Models
         [Display(Name ="Kelas")]
 
         //single key, satu siswa -> satu kelas
-        public int KelasID { get; set; }
+
+        public int? KelasID { get; set; }
         public virtual Kelas Kelas { get; set; }
 
         public List<SiswaNilai> SiswaNilais { get; set; }

@@ -48,7 +48,7 @@ namespace SSST.Controllers
         // GET: Kelas/Create
         public IActionResult Create()
         {
-            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruNama");
+            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruID");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace SSST.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("KelasID,KelasNama,KelasTahun,GuruID")] Kelas kelas)
+        public async Task<IActionResult> Create([Bind("KelasID,KelasNama,KelasTingkat,KelasTahun,GuruID")] Kelas kelas)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace SSST.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruNama", kelas.GuruID);
+            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruID", kelas.GuruID);
             return View(kelas);
         }
 
@@ -82,7 +82,7 @@ namespace SSST.Controllers
             {
                 return NotFound();
             }
-            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruNama", kelas.GuruID);
+            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruID", kelas.GuruID);
             return View(kelas);
         }
 
@@ -91,7 +91,7 @@ namespace SSST.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("KelasID,KelasNama,KelasTahun,GuruNama")] Kelas kelas)
+        public async Task<IActionResult> Edit(int id, [Bind("KelasID,KelasNama,KelasTingkat,KelasTahun,GuruID")] Kelas kelas)
         {
             if (id != kelas.KelasID)
             {
