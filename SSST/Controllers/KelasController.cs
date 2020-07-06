@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SSST.Data;
 using SSST.Models;
+using SSST.ViewModel;
 
 namespace SSST.Controllers
 {
@@ -24,6 +25,23 @@ namespace SSST.Controllers
         {
             var sSSTContext = _context.Kelas.Include(k => k.Guru);
             return View(await sSSTContext.ToListAsync());
+        }
+        public async Task<IActionResult> DaftarSiswaKelas(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var ctx = _context.Kelas
+                .Include(g => g.Guru)
+                .Include(s => s.Siswas)
+                .FirstOrDefault(x => x.KelasID == id);
+            if (ctx == null)
+            {
+                return NotFound();
+            }
+
+            return View(ctx);
         }
 
         // GET: Kelas/Details/5
@@ -48,7 +66,7 @@ namespace SSST.Controllers
         // GET: Kelas/Create
         public IActionResult Create()
         {
-            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruID");
+            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruNama");
             return View();
         }
 
@@ -65,7 +83,7 @@ namespace SSST.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruID", kelas.GuruID);
+            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruNama", kelas.GuruID);
             return View(kelas);
         }
 
@@ -82,7 +100,7 @@ namespace SSST.Controllers
             {
                 return NotFound();
             }
-            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruID", kelas.GuruID);
+            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruNama", kelas.GuruID);
             return View(kelas);
         }
 
@@ -118,7 +136,7 @@ namespace SSST.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruID", kelas.GuruID);
+            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruNama", kelas.GuruID);
             return View(kelas);
         }
 

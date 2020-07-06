@@ -49,8 +49,8 @@ namespace SSST.Controllers
         // GET: MataPelajaran/Create
         public IActionResult Create()
         {
-            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruID");
-            ViewData["KelasID"] = new SelectList(_context.Kelas, "KelasID", "KelasID");
+            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruNama");
+            ViewData["KelasID"] = new SelectList(_context.Kelas, "KelasID", "KelasNama");
             return View();
         }
 
@@ -67,8 +67,8 @@ namespace SSST.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruID", mataPelajaran.GuruID);
-            ViewData["KelasID"] = new SelectList(_context.Kelas, "KelasID", "KelasID", mataPelajaran.KelasID);
+            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruNama", mataPelajaran.GuruID);
+            ViewData["KelasID"] = new SelectList(_context.Kelas, "KelasID", "KelasNama", mataPelajaran.KelasID);
             return View(mataPelajaran);
         }
 
@@ -85,8 +85,8 @@ namespace SSST.Controllers
             {
                 return NotFound();
             }
-            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruID", mataPelajaran.GuruID);
-            ViewData["KelasID"] = new SelectList(_context.Kelas, "KelasID", "KelasID", mataPelajaran.KelasID);
+            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruNama", mataPelajaran.GuruID);
+            ViewData["KelasID"] = new SelectList(_context.Kelas, "KelasID", "KelasNama", mataPelajaran.KelasID);
             return View(mataPelajaran);
         }
 
@@ -122,8 +122,8 @@ namespace SSST.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruID", mataPelajaran.GuruID);
-            ViewData["KelasID"] = new SelectList(_context.Kelas, "KelasID", "KelasID", mataPelajaran.KelasID);
+            ViewData["GuruID"] = new SelectList(_context.Guru, "GuruID", "GuruNama", mataPelajaran.GuruID);
+            ViewData["KelasID"] = new SelectList(_context.Kelas, "KelasID", "KelasNama", mataPelajaran.KelasID);
             return View(mataPelajaran);
         }
 

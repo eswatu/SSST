@@ -11,14 +11,21 @@
     <h4>Guru</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.GuruNama)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.GuruNama)
         </dd>
     </dl>
-    
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GuruAlamat)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GuruAlamat)
+        </dd>
+    </dl>
     <form asp-action="Delete">
         <input type="hidden" asp-for="GuruID" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |

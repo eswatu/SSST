@@ -11,5 +11,6 @@ namespace SSST.Models
         public int GuruID { get; set; }
         [Display(Name ="Nama Guru")]
         public string GuruNama { get; set; }
+        public string GuruAlamat { get; set; }
     }
 }

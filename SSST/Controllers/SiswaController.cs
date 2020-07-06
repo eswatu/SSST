@@ -48,7 +48,7 @@ namespace SSST.Controllers
         // GET: Siswa/Create
         public IActionResult Create()
         {
-            ViewData["KelasID"] = new SelectList(_context.Kelas, "KelasID", "KelasID");
+            ViewData["KelasID"] = new SelectList(_context.Kelas, "KelasID", "KelasNama");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace SSST.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["KelasID"] = new SelectList(_context.Kelas, "KelasID", "KelasID", siswa.KelasID);
+            ViewData["KelasID"] = new SelectList(_context.Kelas, "KelasID", "KelasNama", siswa.KelasID);
             return View(siswa);
         }
 
@@ -82,7 +82,7 @@ namespace SSST.Controllers
             {
                 return NotFound();
             }
-            ViewData["KelasID"] = new SelectList(_context.Kelas, "KelasID", "KelasID", siswa.KelasID);
+            ViewData["KelasID"] = new SelectList(_context.Kelas, "KelasID", "KelasNama", siswa.KelasID);
             return View(siswa);
         }
 
@@ -118,7 +118,7 @@ namespace SSST.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["KelasID"] = new SelectList(_context.Kelas, "KelasID", "KelasID", siswa.KelasID);
+            ViewData["KelasID"] = new SelectList(_context.Kelas, "KelasID", "KelasNama", siswa.KelasID);
             return View(siswa);
         }
 

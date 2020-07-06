@@ -26,6 +26,9 @@ namespace SSST.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("GuruAlamat")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("GuruNama")
                         .HasColumnType("nvarchar(max)");
 
@@ -127,6 +130,9 @@ namespace SSST.Migrations
                         .HasColumnType("int");
 
                     b.Property<float>("Nilai")
+                        .HasColumnType("real");
+
+                    b.Property<float>("NilaiKKM")
                         .HasColumnType("real");
 
                     b.HasKey("SiswaID", "MapelID");

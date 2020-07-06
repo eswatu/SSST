@@ -1,0 +1,50 @@
+﻿@model SSST.ViewModel.DaftarSiswaKelas
+
+@{
+    ViewData["Title"] = "Index";
+    int i = 1;
+}
+
+<h4>Daftar Siswa pada kelas:</h4>
+<h3>@Model.kelasNama</h3>
+<h4>Wali Kelas</h4>
+<h4>Bp/Ib @Model.kelasGuru</h4>
+
+<p>
+    
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>
+                Nama Siswa
+            </th>
+            <th>
+                NIM
+            </th>
+            <th>Keterangan</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Anggota) {
+        <tr>
+            <td>
+                @i;
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SiswaNama)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SiswaNim)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SiswaID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SiswaID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SiswaID">Delete</a>
+            </td>
+        </tr>
+        i++;
+}
+    </tbody>
+</table>

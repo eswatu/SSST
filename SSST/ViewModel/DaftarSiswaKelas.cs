@@ -8,8 +8,9 @@ namespace SSST.ViewModel
 {
     public class DaftarSiswaKelas
     {
-        public int idkelassiswa { get; set; }
-        public Kelas kelas { get; set; }
-        public Siswa siswa { get; set; }
+        public int idkelasiswa { get; set; }
+        public string kelasNama { get; set; }
+        public string kelasGuru { get; set; }
+        public List<Siswa> Anggota { get; set; }
     }
 }

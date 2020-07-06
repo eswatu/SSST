@@ -2,7 +2,7 @@
 
 namespace SSST.Migrations
 {
-    public partial class initial : Migration
+    public partial class newLife : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,8 @@ namespace SSST.Migrations
                 {
                     GuruID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    GuruNama = table.Column<string>(nullable: true)
+                    GuruNama = table.Column<string>(nullable: true),
+                    GuruAlamat = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -98,6 +99,7 @@ namespace SSST.Migrations
                 {
                     SiswaID = table.Column<int>(nullable: false),
                     MapelID = table.Column<int>(nullable: false),
+                    NilaiKKM = table.Column<float>(nullable: false),
                     Nilai = table.Column<float>(nullable: false)
                 },
                 constraints: table =>
