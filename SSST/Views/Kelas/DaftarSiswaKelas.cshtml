@@ -7,6 +7,7 @@
 <h1>Daftar Siswa</h1>
 <h3>Kelas : @Model.KelasNama</h3>
 <h3>Wali  : @Model.Guru.GuruNama</h3>
+<a asp-controller="Kelas" asp-action="StartPenilaian" asp-route-id="@Model.KelasID">Input Nilai</a>
 
 <table class="table">
     <thead>

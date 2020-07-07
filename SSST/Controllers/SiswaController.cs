@@ -26,6 +26,8 @@ namespace SSST.Controllers
             return View(await sSSTContext.ToListAsync());
         }
 
+
+
         // GET: Siswa/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -44,6 +46,7 @@ namespace SSST.Controllers
 
             return View(siswa);
         }
+
 
         // GET: Siswa/Create
         public IActionResult Create()

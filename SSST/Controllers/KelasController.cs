@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -32,10 +33,11 @@ namespace SSST.Controllers
             {
                 return NotFound();
             }
-            var ctx = _context.Kelas
+            var ctx = await _context.Kelas
                 .Include(g => g.Guru)
                 .Include(s => s.Siswas)
-                .FirstOrDefault(x => x.KelasID == id);
+                .FirstOrDefaultAsync(x => x.KelasID == id);
+            StartPenilaian(id);
             if (ctx == null)
             {
                 return NotFound();
@@ -44,6 +46,33 @@ namespace SSST.Controllers
             return View(ctx);
         }
 
+        //harus yakin sukses
+        public void StartPenilaian(int? id)
+        {
+            var kls = _context.Kelas.FirstOrDefault(x => x.KelasID == id);
+            var listMP = from lm in kls.Mapels
+                         select lm.MapelID;
+
+            var listSw = from ls in kls.Siswas
+                         select ls.SiswaID;
+
+            var listSN = _context.SiswaNilai.ToList();
+
+            foreach (var sw in listSw)
+            {
+
+                foreach (var mp in listMP)
+                {
+
+                    if !(listSN.Contains(x => x.SiswaID == sw ))
+                    {
+                        _context.SiswaNilai.Add(ent);
+                        _context.SaveChanges();
+                    }
+                }
+            }
+
+        }
         // GET: Kelas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
