@@ -1,0 +1,35 @@
+﻿@model IEnumerable<SSST.Models.SiswaNilai>
+
+@{
+    ViewData["Title"] = "Input Nilai";
+}
+
+<h1>Input Nilai Siswa</h1>
+
+<h4></h4>
+<hr />
+<table style="width:100%" border="1">
+        <thead>
+            <th>Mata Pelajaran</th>
+            <th>Nilai KKM</th>
+            <th>Nilai Mata Pelajaran</th>
+        </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MataPelajaran.MapelNama</td>
+                <td><input id="@item.NilaiKKM"/></td>
+                <td><input id="@item.Nilai"/></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-controller="Kelas" asp-action="DaftarSiswaKelas" >Kembali ke Kelas</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

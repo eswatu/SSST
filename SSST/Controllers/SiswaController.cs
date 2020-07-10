@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using SSST.Data;
 using SSST.Models;
 
@@ -63,19 +64,24 @@ namespace SSST.Controllers
             {
                 return NotFound();
             }
-            var listMapel = _context.MataPelajaran.Where(mp => mp.KelasID == siswa.KelasID).Select(mp => mp.MapelID);
+            var listMapel = _context.MataPelajaran.Where(mp => mp.KelasID == siswa.KelasID).ToList();
+
             foreach (var pl in listMapel)
             {
-                SiswaNilai sm = new SiswaNilai { SiswaID = siswa.SiswaID, MapelID = pl };
-                if (!_context.SiswaNilai.Contains(sm))
+                bool ada = _context.SiswaNilai.Any(ss => ss.SiswaID == siswa.SiswaID && ss.MapelID == pl.MapelID);
+                if (!ada)
                 {
-                    _context.SiswaNilai.Add(sm);
+                     SiswaNilai sm = new SiswaNilai { Siswa = siswa, MataPelajaran = pl };
+                    _context.Add(sm);
+                    _context.SaveChanges();
                 }
-                _context.SaveChanges();
-                
+
             }
-            IQueryable<SiswaNilai> snl = _context.SiswaNilai.Where(s => s.SiswaID == id);
-            return View(snl);
+
+            var snl = _context.SiswaNilai.Where(s => s.SiswaID == id)
+                .Include(s => s.Siswa)
+                .Include(m => m.MataPelajaran);
+            return View(await snl.ToListAsync());
         }
 
         // GET: Siswa/Create

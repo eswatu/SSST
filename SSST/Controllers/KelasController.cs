@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SSST.Data;
 using SSST.Models;
-using SSST.ViewModel;
 
 namespace SSST.Controllers
 {

@@ -31,7 +31,7 @@
                 @Html.DisplayFor(modelItem => item.SiswaNim)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.SiswaID">Edit</a> |
+                <a asp-controller="Siswa" asp-action="InputNilaiSiswa" asp-route-id="@item.SiswaID">Input Nilai Siswa</a> |
                 <a asp-action="Details" asp-route-id="@item.SiswaID">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.SiswaID">Delete</a>
             </td>
