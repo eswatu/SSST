@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -47,6 +48,35 @@ namespace SSST.Controllers
             return View(siswa);
         }
 
+        // GET: Siswa/Details/5
+        public async Task<IActionResult> InputNilaiSiswa(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var siswa = await _context.Siswa
+                .Include(s => s.Kelas)
+                .FirstOrDefaultAsync(m => m.SiswaID == id);
+            if (siswa == null)
+            {
+                return NotFound();
+            }
+            var listMapel = _context.MataPelajaran.Where(mp => mp.KelasID == siswa.KelasID).Select(mp => mp.MapelID);
+            foreach (var pl in listMapel)
+            {
+                SiswaNilai sm = new SiswaNilai { SiswaID = siswa.SiswaID, MapelID = pl };
+                if (!_context.SiswaNilai.Contains(sm))
+                {
+                    _context.SiswaNilai.Add(sm);
+                }
+                _context.SaveChanges();
+                
+            }
+            IQueryable<SiswaNilai> snl = _context.SiswaNilai.Where(s => s.SiswaID == id);
+            return View(snl);
+        }
 
         // GET: Siswa/Create
         public IActionResult Create()

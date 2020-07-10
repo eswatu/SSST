@@ -37,7 +37,7 @@ namespace SSST.Controllers
                 .Include(g => g.Guru)
                 .Include(s => s.Siswas)
                 .FirstOrDefaultAsync(x => x.KelasID == id);
-            StartPenilaian(id);
+            //StartPenilaian(id);
             if (ctx == null)
             {
                 return NotFound();
@@ -47,32 +47,32 @@ namespace SSST.Controllers
         }
 
         //harus yakin sukses
-        public void StartPenilaian(int? id)
-        {
-            var kls = _context.Kelas.FirstOrDefault(x => x.KelasID == id);
-            var listMP = from lm in kls.Mapels
-                         select lm.MapelID;
+        //public void StartPenilaian(int? id)
+        //{
+        //    var kls = _context.Kelas.FirstOrDefault(x => x.KelasID == id);
+        //    var listMP = from lm in kls.Mapels
+        //                 select lm.MapelID;
 
-            var listSw = from ls in kls.Siswas
-                         select ls.SiswaID;
+        //    var listSw = from ls in kls.Siswas
+        //                 select ls.SiswaID;
 
-            var listSN = _context.SiswaNilai.ToList();
+        //    var listSN = _context.SiswaNilai.ToList();
 
-            foreach (var sw in listSw)
-            {
+        //    foreach (var sw in listSw)
+        //    {
 
-                foreach (var mp in listMP)
-                {
+        //        foreach (var mp in listMP)
+        //        {
 
-                    if !(listSN.Contains(x => x.SiswaID == sw ))
-                    {
-                        _context.SiswaNilai.Add(ent);
-                        _context.SaveChanges();
-                    }
-                }
-            }
+        //            if !(listSN.Contains(x => x.SiswaID == sw ))
+        //            {
+        //                _context.SiswaNilai.Add(ent);
+        //                _context.SaveChanges();
+        //            }
+        //        }
+        //    }
 
-        }
+        //}
         // GET: Kelas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
