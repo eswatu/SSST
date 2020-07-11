@@ -1,0 +1,41 @@
+﻿@model List<SSST.Models.SiswaNilai>
+
+@{
+    ViewData["Title"] = "Lihat Nilai Per Mapel";
+}
+
+<h1>Daftar Nilai Siswa</h1>
+<h4>Untuk Mata Pelajaran</h4>
+<h4>@Model.First().MataPelajaran.MapelNama</h4>
+
+<hr />
+    <table style="width:100%" border="1">
+        <thead>
+            <tr>
+                <th>Nama Siswa</th>
+                <th>NIM</th>
+                <th>Nilai</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.Siswa.SiswaNama</td>
+                <td>@item.Siswa.SiswaNim</td>
+                <td>@item.Nilai</td>
+            </tr>
+            }
+
+        </tbody>
+    </table>
+
+
+
+<div>
+    <a asp-controller="MataPelajaran" asp-action="Index">Kembali Daftar Pelajaran</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

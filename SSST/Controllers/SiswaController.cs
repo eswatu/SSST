@@ -49,7 +49,7 @@ namespace SSST.Controllers
             return View(siswa);
         }
 
-        // GET: Siswa/Details/5
+        // GET: Siswa/InputNilaiSiswa/5
         public async Task<IActionResult> InputNilaiSiswa(int? id)
         {
             if (id == null)
@@ -81,9 +81,66 @@ namespace SSST.Controllers
             var snl = _context.SiswaNilai.Where(s => s.SiswaID == id)
                 .Include(s => s.Siswa)
                 .Include(m => m.MataPelajaran);
-            return View(await snl.ToListAsync());
+            ViewBag.idkelas = siswa.KelasID;
+            return View(snl.ToList());
         }
 
+        // POST: Siswa/InputNilaiSiswa/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> InputNilaiSiswa([Bind("SiswaID,MapelID,NilaiKKM,Nilai")] List<SiswaNilai> snl)
+        {
+
+            if (ModelState.IsValid)
+            {
+                foreach (var item in snl)
+                {
+                    _context.Update(item);
+                }
+                _context.SaveChanges();
+               
+                return RedirectToAction("DaftarSiswaKelas","Kelas",new { id = snl.First().Siswa.KelasID });
+            }
+            return View(snl);
+        }
+
+        // GET: Siswa/LihatNilaiSiswa/5
+        public async Task<IActionResult> LihatNilaiSiswa(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var siswa = await _context.Siswa
+                .Include(s => s.Kelas)
+                .FirstOrDefaultAsync(m => m.SiswaID == id);
+            if (siswa == null)
+            {
+                return NotFound();
+            }
+            var listMapel = _context.MataPelajaran.Where(mp => mp.KelasID == siswa.KelasID).ToList();
+
+            foreach (var pl in listMapel)
+            {
+                bool ada = _context.SiswaNilai.Any(ss => ss.SiswaID == siswa.SiswaID && ss.MapelID == pl.MapelID);
+                if (!ada)
+                {
+                    SiswaNilai sm = new SiswaNilai { Siswa = siswa, MataPelajaran = pl };
+                    _context.Add(sm);
+                    _context.SaveChanges();
+                }
+
+            }
+
+            var snl = _context.SiswaNilai.Where(s => s.SiswaID == id)
+                .Include(s => s.Siswa)
+                .Include(m => m.MataPelajaran);
+            ViewBag.idkelas = siswa.KelasID;
+            return View(snl.ToList());
+        }
         // GET: Siswa/Create
         public IActionResult Create()
         {

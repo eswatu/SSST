@@ -13,7 +13,7 @@ namespace SSST.Models
 
         public int MapelID { get; set; }
         public MataPelajaran MataPelajaran { get; set; }
-        public float NilaiKKM  { get; set; }
+        public float NilaiKKM { get; set; }
         public float Nilai { get; set; }
 
     }

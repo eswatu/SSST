@@ -5,6 +5,7 @@
 }
 
 <h1>Input Nilai Siswa</h1>
+
 <h4>Nama: @Model.First().Siswa.SiswaNama</h4>
 <h4>NIM : @Model.First().Siswa.SiswaNim</h4>
 <hr />
@@ -19,21 +20,18 @@
             </tr>
         </thead>
         <tbody>
-            @for (int item = 0; item < Model.Count; item++)
+            @for (int item = 0; item < Model.Count; item ++)
             {
                 <tr>
                     <input type="hidden" asp-for="@Model[item].SiswaID" />
                     <input type="hidden" asp-for="@Model[item].MapelID" />
                     <td>@Model[item].MataPelajaran.MapelNama</td>
-                    <td><input asp-for="@Model[item].NilaiKKM" /></td>
-                    <td><input asp-for="@Model[item].Nilai" /></td>
+                    <td>@Html.DisplayFor(m => m[item].NilaiKKM)</td>
+                    <td>@Html.DisplayFor(m => m[item].Nilai)</td>
                 </tr>
             }
         </tbody>
     </table>
-    <div class="form-group">
-        <input type="submit" value="Save" class="btn btn-primary" />
-    </div>
 }
 
 

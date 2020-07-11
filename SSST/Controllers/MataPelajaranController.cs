@@ -146,6 +146,27 @@ namespace SSST.Controllers
 
             return View(mataPelajaran);
         }
+        // GET: MataPelajaran/LihatNilaiSiswa/5
+        public async Task<IActionResult> LihatNilaiSiswa(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var mapel = await _context.MataPelajaran
+                .Include(s => s.Kelas)
+                .FirstOrDefaultAsync(m => m.MapelID == id);
+            if (mapel == null)
+            {
+                return NotFound();
+            }
+
+            var snl = _context.SiswaNilai.Where(s => s.MapelID == id)
+                .Include(s => s.Siswa)
+                .Include(m => m.MataPelajaran);
+            return View(snl.ToList());
+        }
 
         // POST: MataPelajaran/Delete/5
         [HttpPost, ActionName("Delete")]
