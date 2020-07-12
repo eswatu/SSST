@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="KelasTahun" class="control-label"></label>
-                <input asp-for="KelasTahun" class="form-control" />
+                <input asp-for="KelasTahun" class="form-control" min="2020" maxlength="4" value="2020" />
                 <span asp-validation-for="KelasTahun" class="text-danger"></span>
             </div>
             <div class="form-group">
