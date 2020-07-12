@@ -45,33 +45,28 @@ namespace SSST.Controllers
             return View(ctx);
         }
 
-        //harus yakin sukses
-        //public void StartPenilaian(int? id)
-        //{
-        //    var kls = _context.Kelas.FirstOrDefault(x => x.KelasID == id);
-        //    var listMP = from lm in kls.Mapels
-        //                 select lm.MapelID;
+        // GET: Kelas/LihatNilaiSemuaSiswa/
+        public async Task<IActionResult> LihatNilaiSemuaSiswa(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //    var listSw = from ls in kls.Siswas
-        //                 select ls.SiswaID;
-
-        //    var listSN = _context.SiswaNilai.ToList();
-
-        //    foreach (var sw in listSw)
-        //    {
-
-        //        foreach (var mp in listMP)
-        //        {
-
-        //            if !(listSN.Contains(x => x.SiswaID == sw ))
-        //            {
-        //                _context.SiswaNilai.Add(ent);
-        //                _context.SaveChanges();
-        //            }
-        //        }
-        //    }
-
-        //}
+            var kls = await _context.Kelas
+                .Include(s => s.Guru)
+                .Include(sw => sw.Siswas)
+                .FirstOrDefaultAsync(m => m.KelasID == id);
+            if (kls == null)
+            {
+                return NotFound();
+            }
+            
+            var snl = _context.SiswaNilai.Where(s => s.MapelID == id)
+                .Include(s => s.Siswa)
+                .Include(m => m.MataPelajaran);
+            return View(snl.ToList());
+        }
         // GET: Kelas/Details/5
         public async Task<IActionResult> Details(int? id)
         {

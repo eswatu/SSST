@@ -147,6 +147,7 @@ namespace SSST.Controllers
             return View(mataPelajaran);
         }
         // GET: MataPelajaran/LihatNilaiSiswa/5
+        //id = MapelID
         public async Task<IActionResult> LihatNilaiSiswa(int? id)
         {
             if (id == null)
@@ -157,6 +158,7 @@ namespace SSST.Controllers
             var mapel = await _context.MataPelajaran
                 .Include(s => s.Kelas)
                 .FirstOrDefaultAsync(m => m.MapelID == id);
+
             if (mapel == null)
             {
                 return NotFound();
