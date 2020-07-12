@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<SSST.Models.Siswa>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Daftar Siswa";
 }
 
-<h1>Index</h1>
+<h1>Daftar Siswa</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Daftar Baru</a>
 </p>
 <table class="table">
     <thead>
@@ -43,9 +43,11 @@
                 @Html.DisplayFor(modelItem => item.Kelas.KelasNama)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.SiswaID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.SiswaID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.SiswaID">Delete</a>
+                <a asp-action="InputNilaiSiswa" asp-route-id="@item.SiswaID">Input Nilai Siswa</a> |
+                <a asp-action="LihatNilaiSiswa" asp-route-id="@item.SiswaID">Lihat Nilai Siswa</a> |
+                <a asp-action="Edit" asp-route-id="@item.SiswaID">Ubah Data</a> |
+                <a asp-action="Details" asp-route-id="@item.SiswaID">Detil</a> |
+                <a asp-action="Delete" asp-route-id="@item.SiswaID">Hapus</a> |
             </td>
         </tr>
 }

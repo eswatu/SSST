@@ -1,7 +1,7 @@
 ﻿@model List<SSST.Models.SiswaNilai>
 
 @{
-    ViewData["Title"] = "Input Nilai";
+    ViewData["Title"] = "Lihat Nilai";
 }
 
 <h1>Input Nilai Siswa</h1>
@@ -9,30 +9,29 @@
 <h4>Nama: @Model.First().Siswa.SiswaNama</h4>
 <h4>NIM : @Model.First().Siswa.SiswaNim</h4>
 <hr />
-@using (Html.BeginForm("InputNilaiSiswa", "Siswa", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <table style="width:100%" border="1">
-        <thead>
+
+<table style="width:100%" border="1">
+    <thead>
+        <tr>
+            <th>Mata Pelajaran</th>
+            <th>Nilai KKM</th>
+            <th>Nilai Mata Pelajaran</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int item = 0; item < Model.Count; item ++)
+        {
             <tr>
-                <th>Mata Pelajaran</th>
-                <th>Nilai KKM</th>
-                <th>Nilai Mata Pelajaran</th>
+                <input type="hidden" asp-for="@Model[item].SiswaID" />
+                <input type="hidden" asp-for="@Model[item].MapelID" />
+                <td>@Model[item].MataPelajaran.MapelNama</td>
+                <td>@Html.DisplayFor(m => m[item].NilaiKKM)</td>
+                <td>@Html.DisplayFor(m => m[item].Nilai)</td>
             </tr>
-        </thead>
-        <tbody>
-            @for (int item = 0; item < Model.Count; item ++)
-            {
-                <tr>
-                    <input type="hidden" asp-for="@Model[item].SiswaID" />
-                    <input type="hidden" asp-for="@Model[item].MapelID" />
-                    <td>@Model[item].MataPelajaran.MapelNama</td>
-                    <td>@Html.DisplayFor(m => m[item].NilaiKKM)</td>
-                    <td>@Html.DisplayFor(m => m[item].Nilai)</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+        }
+    </tbody>
+</table>
+
 
 
 <div>

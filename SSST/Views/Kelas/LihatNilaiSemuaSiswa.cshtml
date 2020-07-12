@@ -1,0 +1,49 @@
+﻿@model List<SSST.ViewModel.LaporanKelas>
+
+@{
+    ViewData["Title"] = "Lihat Nilai Kelas";
+    var listMapel = from sn in Model group sn by sn.mapel into lmapel select lmapel;
+
+    var listSiswa = from ls in Model group ls.nilai by ls.namaSiswa into lsiswa select new { nama = lsiswa.Key, nilai = lsiswa.ToList() } ;
+}
+
+
+<hr />
+
+<table style="width:100%" border="1">
+    <thead>
+        <tr>
+            <th>Nomor</th>
+            <th>Nama</th>
+            @foreach(var item in listMapel.ToList())
+            { 
+                <th>@item.Key</th>
+            }
+            
+        </tr>
+    </thead>
+    <tbody>
+
+        @for (int item = 1; item < listSiswa.Count(); item ++)
+        {
+        <tr>
+            <td>@item</td>
+            <td>@listSiswa.ElementAt(item - 1).nama</td>
+            @for (var isian = 0; isian < listSiswa.ElementAt(item - 1).nilai.Count(); isian++)
+            {
+                <td>@listSiswa.ElementAt(item - 1).nilai[isian]</td>
+            }
+
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+<div>
+    <a asp-controller="Kelas" asp-action="DaftarSiswaKelas" asp-route-id="@ViewBag.idkelas">Kembali ke Kelas</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

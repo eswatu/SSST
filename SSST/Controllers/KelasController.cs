@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SSST.Data;
 using SSST.Models;
+using SSST.ViewModel;
 
 namespace SSST.Controllers
 {
@@ -57,15 +58,21 @@ namespace SSST.Controllers
                 .Include(s => s.Guru)
                 .Include(sw => sw.Siswas)
                 .FirstOrDefaultAsync(m => m.KelasID == id);
+
+            var listSiswa = kls.Siswas.ToList();
+
             if (kls == null)
             {
                 return NotFound();
             }
             
-            var snl = _context.SiswaNilai.Where(s => s.MapelID == id)
-                .Include(s => s.Siswa)
+            var siswanilai = _context.SiswaNilai.Include(s => s.Siswa)
                 .Include(m => m.MataPelajaran);
-            return View(snl.ToList());
+            var snl = from sk in listSiswa
+                      join sn in siswanilai on sk.SiswaID equals sn.SiswaID
+                      select new LaporanKelas{ idSiswa = sn.SiswaID, namaSiswa = sn.Siswa.SiswaNama, mapel = sn.MataPelajaran.MapelNama, nilai = sn.Nilai };
+                      
+            return View(snl.OrderBy(o => o.mapel).ThenBy(s => s.idSiswa).ToList());
         }
         // GET: Kelas/Details/5
         public async Task<IActionResult> Details(int? id)
