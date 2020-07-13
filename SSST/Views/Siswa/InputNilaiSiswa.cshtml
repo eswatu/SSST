@@ -22,7 +22,8 @@
             @for (int item = 0; item < Model.Count; item++)
             {
                 <tr>
-
+                    <input asp-for="@Model[item].MapelID" hidden />
+                    <input asp-for="@Model[item].SiswaID" hidden />
                     <td>@Model[item].MataPelajaran.MapelNama</td>
                     <td><input asp-for="@Model[item].NilaiKKM" max="100" min="0" maxlength="3"/></td>
                     <td><input asp-for="@Model[item].Nilai" max="100" min="0" maxlength="3"/></td>

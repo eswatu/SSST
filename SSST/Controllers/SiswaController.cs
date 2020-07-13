@@ -86,17 +86,18 @@ namespace SSST.Controllers
         // POST: Siswa/InputNilaiSiswa/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> InputNilaiSiswa([Bind("SiswaID,MapelID,NilaiKKM,Nilai")] List<SiswaNilai> snl)
+        public async Task<IActionResult> InputNilaiSiswa(int id,[Bind("SiswaID,MapelID,NilaiKKM,Nilai")] List<SiswaNilai> snl)
         {
-            var idkelas = _context.Siswa.Find(snl.First().SiswaID).KelasID;
+            var idkelas = _context.Siswa.Find(id).KelasID;
             if (ModelState.IsValid)
             {
                 foreach (var item in snl)
                 {
                     _context.Update(item);
+                    _context.SaveChanges();
+
                 }
-                _context.SaveChanges();
-               
+
                 return RedirectToAction("DaftarSiswaKelas","Kelas", new { id = idkelas });
             }
 

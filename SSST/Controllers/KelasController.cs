@@ -54,8 +54,7 @@ namespace SSST.Controllers
                 return NotFound();
             }
 
-            var kls = await _context.Kelas
-                .Include(s => s.Guru)
+            Kelas kls = await _context.Kelas
                 .Include(sw => sw.Siswas)
                 .FirstOrDefaultAsync(m => m.KelasID == id);
 
